@@ -78,8 +78,8 @@ runs:
         # 1. set version
         mvn -B versions:set org.codehaus.mojo:versions-maven-plugin:2.8.1:update-child-modules -DnewVersion=${{ inputs.release-version }}
         # 2. perform release
-        mvn -B ${RELEASE_PROFILE} ${{ inputs.maven-release-options }} -DskipTests -DnexusUrl=https://oss.sonatype.org/ -DserverId=central -Drelease-version=${{ inputs.release-version }} -Dgpg.sign initialize \
-          package source:jar javadoc:jar \
+        mvn -B ${RELEASE_PROFILE} ${{ inputs.maven-release-options }} -DskipTests -DnexusUrl=https://oss.sonatype.org/ -DserverId=central -Drelease-version=${{ inputs.release-version }} -Dgpg.sign \
+          source:jar javadoc:jar \
           deploy org.apache.maven.plugins:maven-gpg-plugin:sign \
           nexus-staging:deploy
         echo ::endgroup::
